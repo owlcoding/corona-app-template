@@ -1,0 +1,65 @@
+platform = "ios"
+-- Supported values for orientation:
+-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+
+-- this is so native views on iOS work and not crash the app
+if ( platform == nil or platform == "ios" ) then
+    -- print ("X)")
+    supported = { "landscapeLeft", "landscapeRight", "portrait" }
+else
+    supported = { "landscapeLeft", "landscapeRight" }
+end
+
+settings = {
+    orientation =
+    {
+    	default = "landscapeRight",
+    	content = "landscapeRight",
+    	supported = supported
+    },	
+	iphone = {
+		plist = {
+			UIStatusBarHidden = true,
+			UIPrerenderedIcon = true, -- set to false for "shine" overlay
+			UIAppFonts =
+            {
+                    "AppleCasual.ttf"
+            },
+			CFBundleDisplayName = "Corona App",
+			CFBundleName = "Corona App",
+			CFBundleVersion = "1.0",
+            
+			--UIApplicationExitsOnSuspend = true, -- uncomment to quit app on suspend
+
+            --[[
+            -- iOS app URL schemes:
+            CFBundleURLTypes =
+            {
+                {
+                    CFBundleURLSchemes =
+                    {
+                        "fbXXXXXXXXXXXXXX", -- example scheme for facebook
+                        "coronasdkapp", -- example second scheme
+                    }
+                }
+            }
+            --]]
+		}
+	},
+	
+	-- Android permissions
+    android = {
+        versionCode = "10",
+        largeHeap = true,
+        userPermissions = {
+            "android.permission.RECORD_AUDIO",
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            "android.permission.CAMERA",
+            -- "android.permission.INTERNET",
+        },
+        usesFeatures = {
+            { name = "android.hardware.camera", required = false },
+        },
+    },
+
+}
